@@ -1,0 +1,87 @@
+
+(rules PCB main
+  (snap_angle 
+    fortyfive_degree
+  )
+  (autoroute_settings
+    (fanout off)
+    (autoroute on)
+    (postroute on)
+    (vias on)
+    (via_costs 50)
+    (plane_via_costs 5)
+    (start_ripup_costs 100)
+    (start_pass_no 10241)
+    (layer_rule F.Cu
+      (active on)
+      (preferred_direction horizontal)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 2.5)
+    )
+    (layer_rule B.Cu
+      (active on)
+      (preferred_direction vertical)
+      (preferred_direction_trace_costs 1.0)
+      (against_preferred_direction_trace_costs 1.7)
+    )
+  )
+  (rule
+    (width 250.0)
+    (clear 200.2)
+    (clear 125.0 (type smd_to_turn_gap))
+    (clear 50.0 (type smd_smd))
+  )
+  (padstack "Via[0-1]_600:400_um"
+    (shape
+      (circle F.Cu 600.0 0.0 0.0)
+    )
+    (shape
+      (circle B.Cu 600.0 0.0 0.0)
+    )
+    (attach off)
+  )
+  (via 
+    "Via[0-1]_600:400_um" "Via[0-1]_600:400_um" default
+  )
+  (via 
+    "Via[0-1]_600:400_um-kicad_default" "Via[0-1]_600:400_um" "kicad_default"
+  )
+  (via_rule
+    default "Via[0-1]_600:400_um"
+  )
+  (via_rule
+    "kicad_default" "Via[0-1]_600:400_um-kicad_default"
+  )
+  (class default
+    (clearance_class default)
+    (via_rule default)
+    (rule
+      (width 250.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+  (class "kicad_default"
+    VCC Data0 Data1 Data2 Data3 Data4 Data5 Data6
+    Data7 GND "/ALU/ALU_Output7" "/ALU/ALU_Output6" "/ALU/ALU_Output5" "/ALU/ALU_Output4" "/ALU/ALU_Output3" "/ALU/ALU_Output2"
+    "/ALU/ALU_Output1" "/ALU/ALU_Output0" "Ctrl_ACC_Source" "/ALU/ALU_A4" "/ALU/ALU_A5" "/ALU/ALU_A6" "/ALU/ALU_A7" Clock
+    "Ctrl_ACC_Input" Reset "/ALU/ALU_A0" "/ALU/ALU_A1" "/ALU/ALU_A2" "/ALU/ALU_A3" "Ctrl_ACC_Output" IR1
+    "Net-(ALU_High1-Pad29)" IR2 "Net-(ALU_High1-Pad19)" "Net-(ALU_High1-Pad20)" "Net-(ALU_High1-Pad24)" "Net-(ALU_High1-Pad28)" "Net-(ALU_High1-Pad21)" "Ctrl_ALU_Enable"
+    IR0 "ALU_Flag0" "Net-(Decode_A1-Pad8)" "Net-(Decode_A1-Pad10)" "Net-(Decode_A1-Pad9)" "Net-(Decode_A1-Pad11)" "Ctrl_PC_Input" "Ctrl_PC_Count"
+    "Ctrl_PC_Output" "Ctrl_Mem_W" "Ctrl_MAR_Output" "Ctrl_MAR_Low_Input" "Ctrl_Mem_R" "Ctrl_MAR_High_Input" "ALU_Flag1" "ALU_Flag2"
+    IR3 "Net-(Lookup1-Pad8)" "Net-(Lookup1-Pad10)" DMA "Net-(Lookup1-Pad9)" "Net-(Lookup1-Pad11)" "Net-(Lookup1-Pad13)" "Net-(Lookup1-Pad15)"
+    "Net-(Lookup1-Pad14)" "Net-(Lookup1-Pad18)" Address0 Address1 Address2 Address3 Address4 Address5
+    Address6 Address7 Address8 Address9 Address10 Address11 "Net-(PC_A1-Pad11)" "Net-(PC_A1-Pad12)"
+    "Net-(PC_A1-Pad13)" "Net-(PC_A1-Pad14)" "Net-(PC_A1-Pad15)" "Net-(PC_B1-Pad11)" "Net-(PC_B1-Pad12)" "Net-(PC_B1-Pad13)" "Net-(PC_B1-Pad14)" "Net-(PC_B1-Pad15)"
+    "Net-(PC_C1-Pad11)" "Net-(PC_C1-Pad12)" "Net-(PC_C1-Pad13)" "Net-(PC_C1-Pad14)"
+    (clearance_class "kicad_default")
+    (via_rule kicad_default)
+    (rule
+      (width 250.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
+  )
+)

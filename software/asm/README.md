@@ -20,3 +20,16 @@
 | `JPE` | 0xD | If event flag is set, jumps to memory location.
 | `JPN` | 0xE | If accumulator is negative, jumps to memory location.
 | `JPZ` | 0xF | If accumulator is zero, jumps to memory location.
+
+## T-Stages
+
+| T | Action | Operations |
+| :---: | ------ | ---------- |
+| 0 | Instruction fetch (low-byte) / PC increment                 | *
+| 1 | Instruction fetch (high-byte) / PC increment / Decode       | *
+| 2 | Arithmetic or logic instruction with data                   | ADD, ADC, SUB, SBC, AND, OR, XOR, TST
+| 3 | Load accumulator immediate (value in current instruction)   | LDI
+| 4 | Load accumulator from memory                                | LDM
+| 5 | Store accumulator to memory                                 | STM
+| 6 | Jump immediate (target address in current instruction)      | JMP, and conditional jumps when condition true
+| 7 | DMA                                                         |
