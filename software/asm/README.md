@@ -15,9 +15,9 @@
 | `LDI` | 0x8 | Loads 8-bit value of operand into accumulator.
 | `LDM` | 0x9 | Loads contents of memory into accumulator.
 | `STM` | 0xA | Stores contents of accumulator to memory.
-| `JMP` | 0xB | Jumps to memory location.
-| `JPC` | 0xC | If carry flag is set, jumps to memory location.
-| `JPE` | 0xD | If event flag is set, jumps to memory location.
+| `MOV` | 0xB | Move values between registers.
+| `JMP` | 0xC | Jumps to memory location.
+| `JPC` | 0xD | If carry flag is set, jumps to memory location.
 | `JPN` | 0xE | If accumulator is negative, jumps to memory location.
 | `JPZ` | 0xF | If accumulator is zero, jumps to memory location.
 
@@ -25,11 +25,13 @@
 
 | T | Action | Operations |
 | :---: | ------ | ---------- |
-| 0 | Instruction fetch (low-byte) / PC increment                 | *
-| 1 | Instruction fetch (high-byte) / PC increment / Decode       | *
-| 2 | Arithmetic or logic instruction with data                   | ADD, ADC, SUB, SBC, AND, OR, XOR, TST
-| 3 | Load accumulator immediate (value in current instruction)   | LDI
-| 4 | Load accumulator from memory                                | LDM
-| 5 | Store accumulator to memory                                 | STM
-| 6 | Jump immediate (target address in current instruction)      | JMP, and conditional jumps when condition true
-| 7 | DMA                                                         |
+| 0 | Instruction fetch (low-byte) / PC increment                   | All
+| 1 | Data fetch (low-byte) / PC increment / Decode                 | All except MOV and LDI
+| 2 | Data fetch (high-byte) / PC increment                         | All except MOV and LDI
+| 3 | Arithmetic or logic instruction with data                     | ADD, ADC, SUB, SBC, AND, OR, XOR, TST
+| 4 | Load accumulator, immediate / PC increment                    | LDI
+| 5 | Load accumulator from memory                                  | LDM
+| 6 | Store accumulator to memory                                   | STM
+| 7 | Move value between registers                                  | MOV
+| 8 | Jump immediate (target address in current instruction)        | JMP, and conditional jumps when condition true
+| 9 | DMA                                                           |
