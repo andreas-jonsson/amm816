@@ -344,7 +344,7 @@ func main() {
 
 			ofp.Seek(0, io.SeekStart)
 			io.Copy(hex.Dumper(os.Stdout), ofp)
-			logger.Println("\n")
+			logger.Print("\n\n")
 		}
 
 		size, _ := ofp.Seek(0, io.SeekEnd)
