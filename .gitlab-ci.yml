@@ -26,10 +26,12 @@ compile:
     variables:
       GOARCH: amd64
     script:
+      - cd $CI_PROJECT_DIR/software/emulator
+      - ls
       - GOOS=windows && go build -o $CI_PROJECT_DIR/software/emulator/amm_windows-amd64.exe $CI_PROJECT_DIR/software/emulator/amm.go
       - GOOS=linux && go build -o $CI_PROJECT_DIR/software/emulator/amm_linux-amd64 $CI_PROJECT_DIR/software/emulator/amm.go
       - GOOS=darwin && go build -o $CI_PROJECT_DIR/software/emulator/amm_osx-amd64.exe $CI_PROJECT_DIR/software/emulator/amm.go
-      - zip -rq emulator.zip amm_windows-amd64.exe amm_linux-amd64 amm_osx-amd64
+      - zip -rq emulator.zip $CI_PROJECT_DIR/software/emulator/amm_windows-amd64.exe $CI_PROJECT_DIR/software/emulator/amm_linux-amd64 $CI_PROJECT_DIR/software/emulator/amm_osx-amd64
     artifacts:
       paths:
         - emulator.zip
