@@ -30,6 +30,6 @@ compile:
       - GOOS=darwin && go build -o amm_osx-amd64 amm.go
     artifacts:
       paths:
-        - $CI_PROJECT_DIR/software/emulator/amm_windows-amd64.exe
-        - $CI_PROJECT_DIR/software/emulator/amm_linux-amd64
-        - $CI_PROJECT_DIR/software/emulator/amm_osx-amd64
+        - amm_windows-amd64.exe
+        - amm_linux-amd64
+        - amm_osx-amd64
