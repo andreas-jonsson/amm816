@@ -9,8 +9,8 @@ before_script:
   - cd $GOPATH/src/$REPO_NAME
 
 stages:
-    - test
-    - build
+  - test
+  - build
 
 format:
     stage: test
@@ -24,6 +24,7 @@ compile:
     variables:
       GOARCH: amd64
     script:
+      - apt install zip
       - GOOS=windows && go build -o $CI_PROJECT_DIR/software/emulator/amm_windows-amd64.exe $CI_PROJECT_DIR/software/emulator/amm.go
       - GOOS=linux && go build -o $CI_PROJECT_DIR/software/emulator/amm_linux-amd64 $CI_PROJECT_DIR/software/emulator/amm.go
       - GOOS=darwin && go build -o $CI_PROJECT_DIR/software/emulator/amm_osx-amd64.exe $CI_PROJECT_DIR/software/emulator/amm.go
