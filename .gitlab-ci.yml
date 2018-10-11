@@ -25,9 +25,9 @@ compile:
       GOARCH: amd64
     script:
       - cd $CI_PROJECT_DIR/software/emulator
-      - GOOS=windows && go build -o amm_windows-amd64.exe amm.go
-      - GOOS=linux && go build -o amm_linux-amd64 amm.go
-      - GOOS=darwin && go build -o amm_osx-amd64 amm.go
+      - GOOS=windows && go build -o ../../amm_windows-amd64.exe amm.go
+      - GOOS=linux && go build -o ../../amm_linux-amd64 amm.go
+      - GOOS=darwin && go build -o ../../amm_osx-amd64 amm.go
     artifacts:
       paths:
         - amm_windows-amd64.exe
