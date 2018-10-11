@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-const version = "0.0.1"
+var logger *log.Logger
 
 var (
 	frequency uint = 1000 // 1Khz
@@ -80,7 +80,7 @@ func memRead(addr uint16) byte {
 	if addr == 0xFFFF {
 		var in [1]byte
 		if _, err := os.Stdin.Read(in[:]); err != nil {
-			panic(err)
+			logger.Fatalln(err)
 		}
 		return in[0]
 	}
@@ -91,10 +91,10 @@ func memWrite(addr uint16, data byte) {
 	switch addr {
 	case 0xFFFF:
 		if _, err := os.Stdout.Write([]byte{data}); err != nil {
-			panic(err)
+			logger.Fatalln(err)
 		}
 	case 0xFFFE:
-		log.Println("halt")
+		logger.Println("halt")
 		os.Exit(0)
 	default:
 		memory[addr] = data
@@ -106,32 +106,48 @@ func aluOperation(inst, destReg, srcReg byte) {
 	switch inst {
 	case opADD, opADC, opSUB, opSBC, opAND, opOR, opXOR, opTST:
 	default:
-		panic("invalid ALU opcode")
+		logger.Fatalln("invalid ALU opcode")
 	}
 }
 
 func main() {
 	flag.UintVar(&frequency, "hz", frequency, "Specify CPU frequency")
 	romName := flag.String("rom", "", "ROM to execute")
-	romLocation := flag.Uint("load", 0, "ROM location")
+	romLocation := flag.Uint("location", 0, "ROM location")
+	romLoad := flag.Uint("load", 0, "Size of ROM that will be loaded from stdin")
+	pipeMode := flag.Bool("pipe", false, "Run in pipe mode")
 	flag.Parse()
 
-	log.Println("AMM816 Emulator")
-	log.Println("Copyright (C) 2016-2018 Andreas T Jonsson")
-	log.Printf("Version: %v", version)
-	log.Println()
+	if *pipeMode {
+		logger = log.New(ioutil.Discard, "", 0)
+	} else {
+		logger = log.New(os.Stdout, "", 0)
 
-	if *romName == "" {
+		logger.Println("AMM816 Emulator")
+		logger.Println("Copyright (C) 2016-2018 Andreas T Jonsson")
+		logger.Println()
+	}
+
+	if *romName == "" && *romLoad == 0 {
 		flag.PrintDefaults()
 		return
 	}
 
-	rom, err := ioutil.ReadFile(*romName)
-	if err != nil {
-		log.Println(err)
-		return
+	if *romLoad > 0 {
+		rom := make([]byte, *romLoad)
+		if n, err := os.Stdin.Read(rom); n != len(rom) || err != nil {
+			logger.Fatalln("could not read ROM from stdin")
+		}
+		copy(memory[*romLocation:], rom)
+	} else {
+		rom, err := ioutil.ReadFile(*romName)
+		if err != nil {
+			logger.Println(err)
+			return
+		}
+		copy(memory[*romLocation:], rom)
 	}
-	copy(memory[*romLocation:], rom)
+
 	regPC = uint16(*romLocation)
 
 	for {
@@ -182,7 +198,7 @@ func main() {
 				cycles = 4
 			}
 		default:
-			panic("invalid opcode")
+			logger.Fatalln("invalid opcode")
 		}
 
 		execTime := (time.Second / time.Duration(frequency)) * time.Duration(cycles)
@@ -191,7 +207,7 @@ func main() {
 		if untilEnd > 0 {
 			time.Sleep(untilEnd)
 		} else {
-			log.Printf("simulation lagging %v", untilEnd*-1)
+			logger.Printf("simulation lagging %v", untilEnd*-1)
 		}
 	}
 }

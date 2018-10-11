@@ -20,8 +20,6 @@ import (
 	"strings"
 )
 
-const version = "0.0.1"
-
 type (
 	patchInfo struct {
 		lable,
@@ -319,7 +317,6 @@ func main() {
 
 		logger.Println("AMM816 Assembler")
 		logger.Println("Copyright (C) 2016-2018 Andreas T Jonsson")
-		logger.Printf("Version: %v", version)
 		logger.Println()
 	} else {
 		logger = log.New(ioutil.Discard, "", 0)
