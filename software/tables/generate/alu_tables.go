@@ -13,14 +13,14 @@ func ALULow() []byte {
 		b := i & 0xF0 >> 4    // 4-7
 		c := i & 0x100 >> 8   // 8, Carry in
 		op := i & 0xE00 >> 11 // 11-13, ALU opcode
+		opb := byte(op)
 
-		switch byte(op) {
-		case opADC, opSBC:
+		if opb != opADC && opb != opSBC {
 			c = 0
 		}
 
 		var n int
-		if byte(op) == opTST {
+		if opb == opTST {
 			n = a
 			switch {
 			case a > b:
@@ -31,7 +31,12 @@ func ALULow() []byte {
 				n |= 0x40 // 6, Zero
 			}
 		} else {
-			n = genALU(a, b, op, c)
+			switch opb {
+			case opADC, opSBC:
+				n = genALU(a, b, op, c)
+			default:
+				n = genALU(a, b, op, 0)
+			}
 
 			data := n & 0xF
 			if n&0xF0 != 0 {
