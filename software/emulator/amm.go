@@ -5,12 +5,18 @@
 package main
 
 import (
+	"bytes"
+	"encoding/hex"
 	"flag"
+	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
 	"math"
 	"os"
 	"time"
+
+	"gitlab.com/phix/amm812/software/tables/generate"
 )
 
 var logger *log.Logger
@@ -71,6 +77,11 @@ var timing = []int{
 	1, //JPZ
 }
 
+var (
+	aluLow  = generate.ALULow()
+	aluHigh = generate.ALUHigh()
+)
+
 func loadMAR() {
 	regMAR = uint16(memRead(regPC+1))<<8 | uint16(memRead(regPC))
 	regPC += 2
@@ -94,8 +105,42 @@ func memWrite(addr uint16, data byte) {
 			logger.Fatalln(err)
 		}
 	case 0xFFFE:
+		fmt.Printf("0x%X\n", data)
+	case 0xFFFD:
+		fmt.Printf("%d\n", data)
+	case 0xFFFC:
 		logger.Println("halt")
 		os.Exit(0)
+	case 0xFFFB:
+		start := uint16(regA[0]) << 8
+		end := uint16(regA[1]) << 8
+		if start == end {
+			start = 0
+			end = 0xFFFF
+		} else if start > end {
+			start = 0
+		}
+
+		fmt.Println()
+		io.Copy(hex.Dumper(os.Stdout), bytes.NewReader(memory[start:end]))
+	case 0xFFFA:
+		fmt.Printf("\nA=[0x%X,0x%X,0x%X,0x%X], PC=0x%X, F=[", regA[0], regA[1], regA[2], regA[3], regPC)
+		if flagC {
+			fmt.Print("C")
+		} else {
+			fmt.Print("_,")
+		}
+		if flagN {
+			fmt.Print("N")
+		} else {
+			fmt.Print("_,")
+		}
+		if flagZ {
+			fmt.Print("Z")
+		} else {
+			fmt.Print("_,")
+		}
+		fmt.Print("]\n")
 	default:
 		memory[addr] = data
 	}
@@ -103,11 +148,45 @@ func memWrite(addr uint16, data byte) {
 }
 
 func aluOperation(inst, destReg, srcReg byte) {
-	switch inst {
-	case opADD, opADC, opSUB, opSBC, opAND, opOR, opXOR, opTST:
-	default:
-		logger.Fatalln("invalid ALU opcode")
+	a := regA[srcReg]
+	b := memRead(regMAR)
+
+	// Low nibble
+
+	al := uint16(a & 0xF)
+	bl := uint16((b & 0xF) << 4)
+
+	il := uint16(inst) << 11
+	if flagC {
+		il &= 0x100
 	}
+
+	l := aluLow[il|al|bl]
+	lout := l & 0xF
+	lc := l & 0x10
+	ln := l & 0x20
+	lz := l & 0x40
+
+	// High nibble
+	ah := uint16(a&0xF0) >> 4
+	bh := uint16((b & 0xF0))
+
+	ih := uint16(inst) << 11
+	if lc != 0 {
+		ih &= 0x100
+	}
+	if ln != 0 {
+		ih &= 0x200
+	}
+
+	h := aluLow[ih|ah|bh]
+	hout := h & 0xF
+
+	flagC = h&0x10 != 0
+	flagN = h&0x20 != 0
+	flagZ = h&0x40 != 0 && lz != 0
+
+	regA[destReg] = hout<<4 | lout
 }
 
 func main() {
@@ -156,8 +235,8 @@ func main() {
 		regIR = memRead(regPC)
 		regPC++
 
-		destReg := regIR & 0x30
-		srcReg := regIR & 0xC0
+		destReg := (regIR & 0x30) >> 4
+		srcReg := (regIR & 0xC0) >> 6
 
 		cycles := timing[regIR&0xF]
 

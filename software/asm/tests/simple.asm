@@ -1,21 +1,20 @@
-;----------------- Code ----------------------
 
-LDI A2 hello_world
-LDI A3 hello_world+1
-
-STM A2 temp
-
+; Read a byte from stdin and write it to stdout
+LDM A0 0xFFFF
+ADD A0 A0 one
+STM A0 0xFFFF
 
 
-STM A0 0xFFFE   ;halt
 
-;----------------- Data ----------------------
+; Memory dump and shutdown
 
-hello_world:
-- "Hello World!"
+;LDI A0 0
+;LDI A1 1 ; Dump one page of memory
+;STM A0 0xFFFB   ;dump
+STM A0 0xFFFA   ;reg
+STM A0 0xFFFC   ;halt
 
-temp:
-.. 0
+;------------------------------ Data --------------------------------
 
 one:
 . 1
