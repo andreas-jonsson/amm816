@@ -70,9 +70,10 @@ func ALUHigh() []byte {
 		m := i & 0x200 >> 9   // 9, Negative
 		z := i & 0x400 >> 10  // 10, Zero in
 		op := i & 0xE00 >> 11 // 11-13, ALU opcode
+		opb := byte(op)
 
 		var n int
-		if byte(op) == opTST {
+		if opb == opTST {
 			n = a
 			switch {
 			case a > b:
@@ -92,7 +93,12 @@ func ALUHigh() []byte {
 				}
 			}
 		} else {
-			n = genALU(a, b, op, c)
+			switch opb {
+			case opADC, opSBC:
+				n = genALU(a, b, op, c)
+			default:
+				n = genALU(a, b, op, 0)
+			}
 
 			data := n & 0xF
 			if n&0xF0 != 0 {
