@@ -14,6 +14,11 @@ func ALULow() []byte {
 		c := i & 0x100 >> 8   // 8, Carry in
 		op := i & 0xE00 >> 11 // 11-13, ALU opcode
 
+		switch byte(op) {
+		case opADC, opSBC:
+			c = 0
+		}
+
 		var n int
 		if byte(op) == opTST {
 			n = a
