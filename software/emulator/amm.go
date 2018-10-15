@@ -16,7 +16,7 @@ import (
 	"os"
 	"time"
 
-	"gitlab.com/phix/amm812/software/tables/generate"
+	"gitlab.com/phix/amm816/software/tables/generate"
 )
 
 var logger *log.Logger
