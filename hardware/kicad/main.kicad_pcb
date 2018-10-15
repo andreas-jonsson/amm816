@@ -815,7 +815,7 @@
     )
   )
 
-  (module Housings_DIP:DIP-16_W7.62mm (layer F.Cu) (tedit 5BB763FD) (tstamp 5BB5DCC5)
+  (module Housings_DIP:DIP-16_W7.62mm (layer F.Cu) (tedit 5BC4BC23) (tstamp 5BB5DCC5)
     (at 102.5 142.5 90)
     (descr "16-lead dip package, row spacing 7.62 mm (300 mils)")
     (tags "dil dip 2.54 300")
@@ -1120,12 +1120,12 @@
     )
   )
 
-  (module Housings_DIP:DIP-16_W7.62mm (layer F.Cu) (tedit 54130A77) (tstamp 5BB5DD55)
+  (module Housings_DIP:DIP-16_W7.62mm (layer F.Cu) (tedit 5BC4BC77) (tstamp 5BB5DD55)
     (at 130 105 90)
     (descr "16-lead dip package, row spacing 7.62 mm (300 mils)")
     (tags "dil dip 2.54 300")
     (path /5A130284/5BB53D95)
-    (fp_text reference PC_C1 (at 0 -5.22 90) (layer F.SilkS)
+    (fp_text reference PC_C1 (at 2.5 -5 90) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text value 74LS161 (at 0 -3.72 90) (layer F.Fab)
@@ -1349,12 +1349,12 @@
     )
   )
 
-  (module Housings_DIP:DIP-20_W7.62mm (layer F.Cu) (tedit 5BB7641E) (tstamp 5BB5DD9F)
+  (module Housings_DIP:DIP-20_W7.62mm (layer F.Cu) (tedit 5BC4BC06) (tstamp 5BB5DD9F)
     (at 132.5 135 90)
     (descr "20-lead dip package, row spacing 7.62 mm (300 mils)")
     (tags "dil dip 2.54 300")
     (path /5A130284/5BB54D19)
-    (fp_text reference U2 (at 10 5 180) (layer F.SilkS)
+    (fp_text reference U2 (at 10 10 180) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text value 74LS245 (at 0 -3.72 90) (layer F.Fab)
@@ -1979,7 +1979,7 @@
     )
   )
 
-  (module Housings_DIP:DIP-16_W7.62mm (layer F.Cu) (tedit 5BB76080) (tstamp 5BB75FFD)
+  (module Housings_DIP:DIP-16_W7.62mm (layer F.Cu) (tedit 5BC4BC13) (tstamp 5BB75FFD)
     (at 167.5 100)
     (descr "16-lead dip package, row spacing 7.62 mm (300 mils)")
     (tags "dil dip 2.54 300")
@@ -2443,12 +2443,12 @@
     )
   )
 
-  (module Housings_DIP:DIP-20_W7.62mm (layer F.Cu) (tedit 54130A77) (tstamp 5BBB2B85)
+  (module Housings_DIP:DIP-20_W7.62mm (layer F.Cu) (tedit 5BC4BBEF) (tstamp 5BBB2B85)
     (at 155 67.5)
     (descr "20-lead dip package, row spacing 7.62 mm (300 mils)")
     (tags "dil dip 2.54 300")
     (path /5BB5DF07/5BBB50C4)
-    (fp_text reference U4 (at 0 -5.22) (layer F.SilkS)
+    (fp_text reference U4 (at 2.5 -5) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
     )
     (fp_text value 74LS245 (at 0 -3.72) (layer F.Fab)
@@ -2548,7 +2548,7 @@
   )
 
   (module Connect:1pin (layer F.Cu) (tedit 5BBB2A9A) (tstamp 5BBB2D82)
-    (at 67.5 67.5)
+    (at 65 65)
     (descr "module 1 pin (ou trou mecanique de percage)")
     (tags DEV)
     (fp_text reference REF1 (at 0 -3.048) (layer F.SilkS) hide
@@ -2562,7 +2562,7 @@
   )
 
   (module Connect:1pin (layer F.Cu) (tedit 5BBB2AA2) (tstamp 5BBB2D83)
-    (at 202.5 67.5)
+    (at 205 65)
     (descr "module 1 pin (ou trou mecanique de percage)")
     (tags DEV)
     (fp_text reference REF2 (at 0 -3.048) (layer F.SilkS) hide
@@ -2576,7 +2576,7 @@
   )
 
   (module Connect:1pin (layer F.Cu) (tedit 5BBB2AAB) (tstamp 5BBB2D84)
-    (at 202.5 152.5)
+    (at 205 155)
     (descr "module 1 pin (ou trou mecanique de percage)")
     (tags DEV)
     (fp_text reference REF3 (at 0 -3.048) (layer F.SilkS) hide
@@ -2590,7 +2590,7 @@
   )
 
   (module Connect:1pin (layer F.Cu) (tedit 5BBB2AB2) (tstamp 5BBB2D85)
-    (at 67.5 152.5)
+    (at 65 155)
     (descr "module 1 pin (ou trou mecanique de percage)")
     (tags DEV)
     (fp_text reference REF4 (at 0 -3.048) (layer F.SilkS) hide
@@ -2609,7 +2609,7 @@
   (gr_text "Copyright © 2018 Andreas T Jonsson" (at 177.5 137.5) (layer F.SilkS)
     (effects (font (size 1 1) (thickness 0.2)))
   )
-  (gr_text AMM812 (at 115 127.5) (layer F.SilkS)
+  (gr_text AMM816 (at 115 127.5) (layer F.SilkS)
     (effects (font (size 4 4) (thickness 0.7)))
   )
   (gr_line (start 60 160) (end 60 60) (angle 90) (layer Edge.Cuts) (width 0.1))
