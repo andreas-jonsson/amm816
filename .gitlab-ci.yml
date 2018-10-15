@@ -1,7 +1,7 @@
 image: golang:latest
 
 variables:
-  REPO_NAME: gitlab.com/phix/amm812
+  REPO_NAME: gitlab.com/phix/amm816
 
 before_script:
   - mkdir -p $GOPATH/src/$(dirname $REPO_NAME)
