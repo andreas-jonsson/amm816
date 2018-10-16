@@ -11,7 +11,7 @@
     (via_costs 50)
     (plane_via_costs 5)
     (start_ripup_costs 100)
-    (start_pass_no 4315)
+    (start_pass_no 4470)
     (layer_rule F.Cu
       (active on)
       (preferred_direction horizontal)
@@ -84,6 +84,16 @@
   )
   (via_rule
     VCC "Via[0-1]_1200:800_um-VCC"
+  )
+  (class default
+    (clearance_class default)
+    (via_rule default)
+    (rule
+      (width 250.0)
+    )
+    (circuit 
+      (use_layer F.Cu B.Cu)
+    )
   )
   (class "kicad_default"
     Data0 Data1 Data2 Data3 Data4 Data5 Data6 Data7

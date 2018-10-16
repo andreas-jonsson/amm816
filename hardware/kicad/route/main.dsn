@@ -1,4 +1,4 @@
-(pcb /home/phix/go/src/gitlab.com/phix/amm812/hardware/kicad/route/main.dsn
+(pcb /home/phix/go/src/gitlab.com/phix/amm816/hardware/kicad/route/main.dsn
   (parser
     (string_quote ")
     (space_in_quoted_tokens on)
@@ -65,14 +65,14 @@
       (place PC_B1 120000 -87500 front 90 (PN 74LS161))
       (place PC_C1 130000 -105000 front 90 (PN 74LS161))
       (place T_Stage1 170000 -70000 front 0 (PN 74LS173))
-      (place IR_High1 110000 -97500 front 0 (PN 74LS173))
+      (place IR_High1 112500 -97500 front 0 (PN 74LS173))
       (place IR_Low1 167500 -100000 front 0 (PN 74LS173))
     )
     (component "Connectors_Molex:Molex_KK-6410-02_02x2.54mm_Straight"
       (place Power1 197500 -145000 front 0 (PN CONN_01X02))
     )
     (component Capacitors_ThroughHole:C_Disc_D3_P2.5
-      (place C2 115000 -120000 front 180 (PN 100nF))
+      (place C2 117500 -120000 front 180 (PN 100nF))
       (place C3 125000 -140000 front 90 (PN 100nF))
       (place C4 160000 -145000 front 270 (PN 100nF))
       (place C5 160000 -130000 front 270 (PN 100nF))
@@ -83,19 +83,19 @@
       (place C10 142500 -82500 front 270 (PN 100nF))
       (place C11 142500 -70000 front 270 (PN 100nF))
       (place C12 105000 -95000 front 0 (PN 100nF))
-      (place C13 67500 -142500 front 270 (PN 100nF))
+      (place C13 87500 -145000 front 90 (PN 100nF))
       (place C15 70000 -110000 front 0 (PN 100nF))
       (place C16 82500 -110000 front 180 (PN 100nF))
       (place C17 172500 -92500 front 0 (PN 100nF))
       (place C18 190000 -145000 front 270 (PN 100nF))
       (place C19 172500 -122500 front 180 (PN 100nF))
-      (place C32 195000 -125000 front 180 (PN 100nF))
+      (place C32 195000 -122500 front 180 (PN 100nF))
     )
     (component Pin_Headers:Pin_Header_Straight_2x13_Pitch2.00mm
       (place Register_Bus1 95000 -67500 front 0 (PN CONN_02X13))
     )
     (component "Housings_DIP:DIP-14_W7.62mm"
-      (place U3 87500 -140000 front 270 (PN 74LS04))
+      (place U3 67500 -147500 front 90 (PN 74LS04))
     )
     (component Pin_Headers:Pin_Header_Straight_2x20_Pitch2.00mm
       (place System_Bus1 92500 -152500 front 90 (PN CONN_02X20))
@@ -107,10 +107,10 @@
       (place G*** 177500 -130000 front 0 (PN LOGO))
     )
     (component Connect:1pin
-      (place REF1 67500 -67500 front 0 (PN 1pin))
-      (place REF2 202500 -67500 front 0 (PN 1pin))
-      (place REF3 202500 -152500 front 0 (PN 1pin))
-      (place REF4 67500 -152500 front 0 (PN 1pin))
+      (place REF1 65000 -65000 front 0 (PN 1pin))
+      (place REF2 205000 -65000 front 0 (PN 1pin))
+      (place REF3 205000 -155000 front 0 (PN 1pin))
+      (place REF4 65000 -155000 front 0 (PN 1pin))
     )
   )
   (library
@@ -835,20 +835,15 @@
       Ctrl_MAR_Output_I Ctrl_Mem_R Ctrl_Mem_W Ctrl_PC_Count Ctrl_PC_Input_I
       Ctrl_PC_Output_I DMA Data0 Data1 Data2 Data3 Data4 Data5 Data6 Data7
       IR0 IR1 IR2 IR3 "Net-(ACC_Data_In_Buffer1-Pad19)" "Net-(ALU_High1-Pad19)"
-      "Net-(ALU_High1-Pad20)" "Net-(ALU_High1-Pad21)" "Net-(ALU_High1-Pad22)"
-      "Net-(ALU_High1-Pad24)" "Net-(ALU_High1-Pad28)" "Net-(ALU_High1-Pad29)"
-      "Net-(ALU_Low1-Pad22)" "Net-(Decode1-Pad10)" "Net-(Decode1-Pad11)" "Net-(Decode1-Pad8)"
-      "Net-(Decode1-Pad9)" "Net-(Decode_A1-Pad10)" "Net-(Decode_A1-Pad11)"
-      "Net-(Decode_A1-Pad8)" "Net-(Decode_A1-Pad9)" "Net-(Flags1-Pad6)" "Net-(IR_High1-Pad1)"
-      "Net-(Lookup1-Pad10)" "Net-(Lookup1-Pad11)" "Net-(Lookup1-Pad13)" "Net-(Lookup1-Pad14)"
-      "Net-(Lookup1-Pad15)" "Net-(Lookup1-Pad18)" "Net-(Lookup1-Pad8)" "Net-(Lookup1-Pad9)"
+      "Net-(ALU_High1-Pad20)" "Net-(ALU_High1-Pad21)" "Net-(ALU_High1-Pad24)"
+      "Net-(ALU_High1-Pad28)" "Net-(ALU_High1-Pad29)" "Net-(Decode1-Pad10)"
+      "Net-(Decode1-Pad11)" "Net-(Decode1-Pad8)" "Net-(Decode1-Pad9)" "Net-(IR_High1-Pad1)"
+      "Net-(Lookup1-Pad13)" "Net-(Lookup1-Pad14)" "Net-(Lookup1-Pad15)" "Net-(Lookup1-Pad18)"
       "Net-(PC_A1-Pad1)" "Net-(PC_A1-Pad11)" "Net-(PC_A1-Pad12)" "Net-(PC_A1-Pad13)"
       "Net-(PC_A1-Pad14)" "Net-(PC_A1-Pad15)" "Net-(PC_B1-Pad11)" "Net-(PC_B1-Pad12)"
       "Net-(PC_B1-Pad13)" "Net-(PC_B1-Pad14)" "Net-(PC_B1-Pad15)" "Net-(PC_C1-Pad11)"
-      "Net-(PC_C1-Pad12)" "Net-(PC_C1-Pad13)" "Net-(PC_C1-Pad14)" "Net-(PC_C1-Pad15)"
-      "Net-(U2-Pad11)" "Net-(U2-Pad12)" "Net-(U2-Pad13)" "Net-(U2-Pad14)"
-      "Net-(U4-Pad11)" "Net-(U4-Pad12)" "Net-(U4-Pad13)" "Net-(U4-Pad14)"
-      Register0 Register1 Register2 Register3 Reset
+      "Net-(PC_C1-Pad12)" "Net-(PC_C1-Pad13)" "Net-(PC_C1-Pad14)" Register0
+      Register1 Register2 Register3 Reset
       (circuit
         (use_via Via[0-1]_600:400_um)
       )
