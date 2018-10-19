@@ -213,18 +213,14 @@ start:
 		return TOKEN_OPEN_CURL
 	case '}':
 		return TOKEN_CLOSE_CURL
-	/*
-		case '[':
-			return _ARRAY_BEGIN
-		case ']':
-			return _ARRAY_END
-		case ',':
-			return _COMMA
-		case ':':
-			return _COLON
-		case '=':
-			return _EQUAL
-	*/
+	case '[':
+		return TOKEN_OPEN_BRAC
+	case ']':
+		return TOKEN_CLOSE_BRAC
+	case ',':
+		return TOKEN_COMMA
+	case '=':
+		return TOKEN_EQUAL
 	case '"':
 		s, err := lex.readString()
 		if err != nil {
